@@ -1,0 +1,38 @@
+.login-container {
+    height: 100vh;
+    width: 100vw;
+
+    .details-container {
+        // background-color: red;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        display: flex;
+
+        .name-password-details-container {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            height: 50%;
+            width: 50%;
+            background-color: seagreen;
+
+        }
+
+        .name-con {
+            // height: 25%;
+        }
+
+        .password-container {
+            // height: 25%;
+        }
+
+        .button-container {
+            display: flex;
+            height: 10%;
+            align-items: flex-end;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+<!-- On click of one dropdown, value of antoher dropdown is set. -->
+
+<div class="text-container" appStyle>
+    Sameendra
+</div>
+<select [(ngModel)]="selectedCountry">
+    <option *ngFor="let countryi of countries" [ngValue]="countryi">
+        {{countryi.countryName}}
+    </option>
+</select>
+<select>
+    <option *ngFor="let city of selectedCountry?.cities">{{ city.city }}</option>
+</select>
+<button (click)="clickHandler()" >Click</button>
+<button (click)="singleClickHandler()">Single Click</button>
+<app-two-way-data-binding-child [data]="childData" [singleData]="singleData"></app-two-way-data-binding-child>
+<!-- <app-two-way-data-binding-child [data]="childData"></app-two-way-data-binding-child> -->

@@ -1,0 +1,27 @@
+<div class="buttons-container">
+    <button type="button" (click)="batButtonClickHandler()">Bat</button>
+    <button type="button" (click)="ballButtonClickHandler()">Ball</button>
+    <!-- <button type="button" (click)="playersButtonClickHandler()">Players</button>
+    <button type="button" (click)="umpiresButtonClickHandler()">Umpires</button>
+    <button type="button" (click)="groundButtonClickHandler()">Ground</button>
+    <button type="button" (click)="equipmentButtonClickHandler()">Equipment</button>-->
+    <button type="button" (click)="zipButtonClickHandler()">ZIP</button>
+    <button type="button" (click)="combineLatestButtonClickHandler()">Combine latest</button>
+</div>
+<div class="image-container" *ngIf="showImage">
+    Cricket
+</div>
+<div class="stock-price">
+    {{stockPrice}}
+    <div class="stock-market-start-button-container">
+        <button (click)="startStream()">Start stream</button>
+    </div>
+    <div class="place-bid-button-container">
+        <button (click)="emitStreamClickHandler()">Emit Stream</button>
+    </div>
+</div>
+<div class="di-container">
+    <div class="text-container">
+        {{testVariable}}
+    </div>
+</div>
