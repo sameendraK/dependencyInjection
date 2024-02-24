@@ -1,0 +1,4 @@
+{{displayVal}}
+<button (click)="clickHandler()">Click </button>
+<button (click)="cdChildClickHandler()">Send data to cd Child </button>
+<app-cd-child #cdChild [inputVal]="apiResponse" [data]="data">child</app-cd-child>

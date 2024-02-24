@@ -17,7 +17,12 @@ import { RxjsModule } from './components/rxjs/rxjs.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DependencyInjectionComponent } from './components/dependency-injection/dependency-injection.component';
 import { DependencyInjectionModule } from './components/dependency-injection/dependency-injection.module';
+import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { UserService } from './services/user.service';
+import { LoggerService } from './services/logger.service';
+import { loggerToken, userToken } from './tokens/tokens';
+import { ChangeDetectionModule } from './components/change-detection/change-detection.module';
+import { TemplateBindingComponent } from './components/template-binding/template-binding.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,7 @@ import { UserService } from './services/user.service';
     NotFoundComponent,
     StyleDirective,
     TemplateReferenceComponent,
-    DependencyInjectionComponent
+    TemplateBindingComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,12 +40,20 @@ import { UserService } from './services/user.service';
     CommonModule,
     FormsModule,
     TwoWayBindingModule,
-    RxjsModule,
-    // HttpClient,
+    // RxjsModule,
     HttpClientModule,
-    DependencyInjectionModule
+    // ChangeDetectionModule
+    // DependencyInjectionModule
   ],
-  providers: [],
+  providers: [
+    // UserService,
+    // { provide: userToken, useClass: UserService },
+    // { provide: loggerToken, useExisting: UserService },
+    LoggerService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+
+}

@@ -1,12 +1,17 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Observable, Subject, combineLatest, concatMap, exhaustMap, from, fromEvent, interval, map, mergeMap, of, switchMap, take, tap, zip } from 'rxjs';
+import { Component, Inject, Injector, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Observable, Subject, combineLatest, concatMap, debounceTime, exhaustMap, from, fromEvent, interval, map, mergeMap, of, switchMap, take, tap, zip } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { response } from 'express';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { loggerToken, userToken } from 'src/app/tokens/tokens';
 @Component({
   selector: 'app-rxjs',
   templateUrl: './rxjs.component.html',
-  styleUrls: ['./rxjs.component.scss']
+  styleUrls: ['./rxjs.component.scss'],
+  providers: [
+    UserService
+  ]
 })
 export class RxjsComponent implements OnInit, OnChanges {
 
@@ -15,18 +20,43 @@ export class RxjsComponent implements OnInit, OnChanges {
   count: number = 0;
   testVariable: string = '';
 
+  constructor(
+    private http: HttpClient,
+    // @Inject(userToken) private userService: UserService,
+    // @Inject(loggerToken) private userService1: UserService,
+    private router: Router,
+    private userService: UserService,
+    private injector: Injector
+  ) {
+
+  }
+
   ngOnInit() {
     this.zipValues();
     this.combineLatest();
     this.streamHandler();
-    this.testVariable = this.userService.testVariable
+    this.userService.testVariable += " from RxJS.";
+    this.testVariable = this.userService.testVariable;
+    this.inputChangeFn();
   }
 
-  constructor(
-    private http: HttpClient,
-    private userService: UserService
-  ) {
-
+  inputChangeFn() {
+    const input: any = document.querySelector('.inputBox');
+    fromEvent(input, 'input').pipe(
+      debounceTime(500),
+      switchMap((res) => this.http.get(`https://api.github.com/search/users?q=${res}`)),
+      // map((res: any) => res?.value)
+    ).subscribe(
+      (res) => console.log(res))
+    // console.log(input);
+  }
+  inpChange(input: any): any {
+    if (input) {
+      console.log(input)
+      return (of(input))
+    }
+    console.log('out of if', input) 
+    return (of('out of If', input))
   }
   showImage: boolean = false;
   bat$: Subject<any> = new Subject();
@@ -47,6 +77,10 @@ export class RxjsComponent implements OnInit, OnChanges {
   }
   ballButtonClickHandler() {
     this.ball$.next('ball clicked')
+  }
+  diButtonClickHandler() {
+    this.router.navigate(['/di'])
+
   }
   // playersButtonClickHandler() {
   //   this.players$.next('players clicked');

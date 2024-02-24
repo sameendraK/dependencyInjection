@@ -7,6 +7,7 @@ import { TwoWayBindingComponent } from './components/two-way-binding/two-way-bin
 import { TemplateReferenceComponent } from './components/template-reference/template-reference.component';
 import { RxjsComponent } from './components/rxjs/rxjs.component';
 import { DependencyInjectionComponent } from './components/dependency-injection/dependency-injection.component';
+import { ChangeDetectionComponent } from './components/change-detection/change-detection.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'di',
     component: DependencyInjectionComponent
+  },
+  {
+    path: 'cd',
+    component: ChangeDetectionComponent
+
   },
   {
     path: '**',

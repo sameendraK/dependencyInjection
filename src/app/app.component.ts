@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ApplicationRef, Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'testRuns';
+  constructor(@Inject(ApplicationRef) private appRef: ApplicationRef) {}
+
+  tick() {
+    this.appRef.tick();
+  }
 }
